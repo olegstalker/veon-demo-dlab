@@ -1,0 +1,191 @@
+---
+import Base from "../layouts/Base.astro";
+import Section from "../components/Section.astro";
+import FutureLink from "../components/FutureLink.astro";
+import "../styles/dlab.css";
+
+const NOTE = "Розділ у розробці";
+const cats = ["Авто","Електротехніка","Фінанси","Будівництво / нерухомість","Hi-Tech","Зв’язок","Комунальні служби","Культура","Магазини","Медицина","Організації","Навчання","Послуги","Виробництво","Реклама / поліграфія","Розваги","Спорт / краса","Торгівля","Транспорт"];
+const groups = [
+  { t: "Львів", items: [{ n: "Стартовий", p: "1 990" }, { n: "Мережа філій", p: "3 590" }] },
+  { t: "Україна", items: [{ n: "Ефективний", p: "2 990" }, { n: "Оптимальний", p: "3 990" }, { n: "VIP", p: "9 990" }] },
+];
+const services = [
+  "Бази даних",
+  "Електронні довідники",
+  "CRM",
+  "Прямий маркетинг",
+  "Створення сайтів",
+  "Розкрутка сайтів",
+  "Аудит сайтів",
+  "Львівський путівник: архітектурні пам’ятки, музеї, храми",
+];
+const nav = [["#catalog","Каталог"],["#packages","Пакети"],["#services","Послуги"],["#about","Про довідник"],["#contacts","Контакти"]];
+---
+<Base lang="uk" title="Dlab — універсальний довідник Львова з 2003 року" description="Каталог компаній Львова та України, річні пакети реклами від 1990 грн, телефон +38 (032) 232-88-01">
+  <Fragment slot="head">
+    <link rel="preload" href="/fonts/literata-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/pt-sans-cyrillic-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+  </Fragment>
+
+  <header slot="header" class="site-header">
+    <div class="container site-header__in">
+      <a class="logo" href="#top" aria-label="Dlab — на початок"><span class="logo__mark" aria-hidden="true">D</span><span class="logo__text"><b>Dlab</b><small>Універсальний львівський довідник</small></span></a>
+      <nav class="nav-desktop" aria-label="Основне меню" data-rec="R-003">
+        <ul>{nav.map(([h, t]) => <li><a href={h}>{t}</a></li>)}</ul>
+      </nav>
+      <a class="btn btn--primary btn--head" href="tel:+380322328801">Зателефонувати</a>
+      <details class="menu-mobile" data-rec="R-003">
+        <summary aria-label="Меню"><span class="burger" aria-hidden="true"></span></summary>
+        <ul>
+          {nav.map(([h, t]) => <li><a href={h}>{t}</a></li>)}
+          <li><a href="mailto:info@dlab.com.ua">info@dlab.com.ua</a></li>
+        </ul>
+      </details>
+    </div>
+  </header>
+
+  <Section id="hero" rec="R-001, R-002, R-004, R-011" class="hero">
+    <div class="container hero__grid">
+      <div class="hero__main">
+        <h1 class="hero__title"><span class="line">Довідник Львова:</span> <span class="line">знайдіть компанію</span> <span class="line">або <mark>розмістіть свою</mark></span></h1>
+        <p class="hero__lead" data-rec="R-001">Універсальний львівський довідник-каталог бізнесу з 2003 року: 19 категорій і річні пакети реклами для Львова та всієї України.</p>
+        <div class="search" role="search" data-rec="R-004">
+          <label for="q" class="search__label">Що шукаєте?</label>
+          <div class="search__row">
+            <input id="q" type="search" readonly placeholder="Компанія або послуга" aria-describedby="q-note" />
+            <FutureLink note="Пошук з’явиться в повній версії" class="btn btn--primary btn--search">Знайти</FutureLink>
+          </div>
+          <p class="search__chips" id="q-note"><span>Наприклад:</span>
+            <FutureLink note={NOTE} class="chip">готелі</FutureLink>
+            <FutureLink note={NOTE} class="chip">аптека</FutureLink>
+            <FutureLink note={NOTE} class="chip">шиномонтаж</FutureLink>
+          </p>
+        </div>
+        <p class="hero__cta" data-rec="R-002">
+          <a class="btn btn--primary" href="tel:+380322328801">Зателефонувати</a>
+          <a class="btn btn--ghost" href="mailto:info@dlab.com.ua">Написати</a>
+        </p>
+      </div>
+      <aside class="hero__side" aria-label="Контакти">
+        <p class="side__since">з 2003</p>
+        <p class="side__lbl">Телефон</p>
+        <p class="side__tel"><a href="tel:+380322328801">+38 (032) 232-88-01</a></p>
+        <p class="side__lbl">E-mail</p>
+        <p><a href="mailto:info@dlab.com.ua">info@dlab.com.ua</a></p>
+      </aside>
+    </div>
+  </Section>
+
+  <Section id="catalog" rec="R-005, R-013" class="block catalog" label="Категорії каталогу">
+    <div class="container">
+      <header class="block__head" data-reveal>
+        <h2>Категорії каталогу</h2>
+        <p>19 категорій верхнього рівня — від авто до транспорту.</p>
+      </header>
+      <ol class="index" data-reveal>
+        {cats.map((c, i) => (
+          <li><FutureLink note={NOTE} class="index__row"><span class="index__name">{c}</span><span class="index__dots" aria-hidden="true"></span><span class="index__num">{String(i + 1).padStart(2, "0")}</span></FutureLink></li>
+        ))}
+      </ol>
+      <p class="block__more" data-reveal><FutureLink note={NOTE} class="link-fl">Повний бізнес-каталог →</FutureLink></p>
+    </div>
+  </Section>
+
+  <Section id="packages" rec="R-007, R-008" class="block packages" label="Пакети реклами на рік">
+    <div class="container">
+      <header class="block__head" data-reveal>
+        <h2>Пакети реклами на рік</h2>
+        <p>П’ять річних пакетів у двох групах: для Львова та для всієї України.</p>
+      </header>
+      <div class="price" data-reveal>
+        {groups.map((g) => (
+          <div class="price__group">
+            <h3>{g.t}</h3>
+            <ul>
+              {g.items.map((it) => (
+                <li class="price__row">
+                  <details>
+                    <summary>
+                      <span class="price__name">{it.n}</span>
+                      <span class="price__dots" aria-hidden="true"></span>
+                      <span class="price__sum"><span class="price__val">{it.p}</span> <span class="price__cur">грн / рік</span></span>
+                      <span class="price__chev" aria-hidden="true"></span>
+                    </summary>
+                    <div class="price__more"><div>
+                      <p>Склад пакета «{g.t}. {it.n}» уточнюйте за телефоном — детальна сторінка пакета з’явиться в повній версії.</p>
+                      <p class="price__acts">
+                        <a class="btn btn--primary" href="tel:+380322328801" data-rec="R-008">Зателефонувати</a>
+                        <FutureLink note={NOTE} class="btn btn--ghost">Детальніше</FutureLink>
+                      </p>
+                    </div></div>
+                  </details>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <p class="block__more" data-reveal><FutureLink note="Порівняння пакетів з’явиться в повній версії" class="link-fl">Порівняти пакети →</FutureLink></p>
+    </div>
+  </Section>
+
+  <Section id="services" class="block services" label="Інформаційні послуги">
+    <div class="container services__grid">
+      <header class="block__head" data-reveal>
+        <h2>Інформаційні послуги</h2>
+        <p>Крім каталогу, Dlab пропонує супутні послуги та Львівський путівник.</p>
+      </header>
+      <ul class="lines" data-reveal>
+        {services.map((s) => <li>{s}</li>)}
+      </ul>
+    </div>
+  </Section>
+
+  <Section id="about" rec="R-010" class="about" label="Про довідник Dlab">
+    <div class="container about__grid">
+      <div data-reveal>
+        <h2>Про довідник Dlab</h2>
+        <p class="about__since"><span>2003</span></p>
+        <p class="about__txt">Dlab працює як довідник бізнесу Львова з 2003 року.</p>
+      </div>
+      <dl class="facts" data-reveal>
+        <div><dt>Відвідувачів на день</dt><dd>до 10 000 унікальних</dd><dd class="facts__src">за даними сайту</dd></div>
+        <div><dt>Компаній у каталозі</dt><dd>14 000+</dd><dd class="facts__src">за даними сайту</dd></div>
+      </dl>
+    </div>
+  </Section>
+
+  <Section id="contacts" rec="R-009" class="block contacts" label="Контакти">
+    <div class="container contacts__grid">
+      <header class="block__head" data-reveal>
+        <h2>Контакти</h2>
+        <p>Щоб потрапити в довідник або обрати пакет, зателефонуйте чи напишіть.</p>
+      </header>
+      <div class="contacts__list" data-reveal>
+        <p class="side__lbl">Телефон</p>
+        <p class="contacts__big"><a href="tel:+380322328801">+38 (032) 232-88-01</a></p>
+        <p class="side__lbl">E-mail</p>
+        <p class="contacts__big"><a href="mailto:info@dlab.com.ua">info@dlab.com.ua</a></p>
+        <p class="side__lbl">Поштова адреса</p>
+        <p>79011, м. Львів, а/с 1005</p>
+        <p class="contacts__acts">
+          <FutureLink note="Онлайн-заявка з’явиться в повній версії сайту" class="btn btn--ghost">Додати компанію</FutureLink>
+          <span class="contacts__hint">Умови уточнюйте за телефоном або e-mail.</span>
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <footer slot="footer" class="site-footer">
+    <div class="container site-footer__in">
+      <p><b>Dlab</b> — універсальний львівський довідник · з 2003 року</p>
+      <ul>
+        <li><FutureLink note={NOTE}>Публічний договір</FutureLink></li>
+        <li><FutureLink note={NOTE}>Умови використання</FutureLink></li>
+        <li><FutureLink note={NOTE}>Вхід в кабінет</FutureLink></li>
+      </ul>
+      <p>79011, м. Львів, а/с 1005 · <a href="tel:+380322328801">+38 (032) 232-88-01</a> · <a href="mailto:info@dlab.com.ua">info@dlab.com.ua</a></p>
+    </div>
+  </footer>
+</Base>
